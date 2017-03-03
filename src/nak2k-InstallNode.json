@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "2.0",
+  "description": "Install Node.js",
+  "parameters": {
+    "version": {
+      "description": "Version of Node.js",
+      "type": "String",
+      "default": "8.1.4"
+    },
+    "owner": {
+      "description": "Owner of installed node.js",
+      "type": "String",
+      "default": "ec2-user"
+    }
+  },
+  "mainSteps": [
+    {
+      "action": "aws:runShellScript",
+      "name": "runShellScript",
+      "inputs": {
+        "runCommand": [
+          "cd /opt && curl -sSL https://nodejs.org/dist/v{{ version }}/node-v{{ version }}-linux-x64.tar.gz | tar -xvzf - && chown -R {{ owner }} node-v{{ version }}-linux-x64 && ln -sfn node-v{{ version }}-linux-x64 node",
+          "echo 'export PATH=$PATH:/opt/node/bin' > /etc/profile.d/node.sh"
+        ]
+      }
+    }
+  ]
+}

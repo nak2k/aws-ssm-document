@@ -1,0 +1,29 @@
+{
+  "name": "@nak2k/aws-ssm-document",
+  "version": "0.0.1",
+  "private": true,
+  "description": "SSM Documents of AWS",
+  "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/nak2k/aws-ssm-document/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "homepage": "https://github.com/nak2k/aws-ssm-document",
+  "keywords": [
+    "aws",
+    "ssm"
+  ],
+  "license": "MIT",
+  "main": "lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nak2k/aws-ssm-document.git"
+  },
+  "scripts": {
+    "update-document": "for file in src/*.json; do aws ssm update-document --name $(basename $file .json) --content file://$file --document-version \\$LATEST || :; done"
+  },
+  "files": [
+    "README.md"
+  ]
+}
