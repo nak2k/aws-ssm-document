@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "2.0",
+  "description": "Import public keys from GitHub (https://github.com/nak2k/aws-ssm-document)",
+  "parameters": {
+    "OSAccount": {
+      "description": "OS account to add authorized_keys",
+      "type": "String",
+      "default": "ec2-user"
+    },
+    "GitHubAccount": {
+      "description": "GitHub user account to obtain public keys",
+      "type": "String"
+    }
+  },
+  "mainSteps": [
+    {
+      "action": "aws:runShellScript",
+      "name": "runShellScript",
+      "inputs": {
+        "runCommand": [
+          "curl -sSL -o - 'https://github.com/{{ GitHubAccount }}.keys' >> '/home/{{ OSAccount }}/.ssh/authorized_keys'"
+        ]
+      }
+    }
+  ]
+}
