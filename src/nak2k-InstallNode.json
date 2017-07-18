@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0",
-  "description": "Install Node.js",
+  "description": "Install Node.js (https://github.com/nak2k/aws-ssm-document)",
   "parameters": {
     "version": {
       "description": "Version of Node.js",
