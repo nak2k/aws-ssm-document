@@ -21,7 +21,14 @@
     "url": "git+https://github.com/nak2k/aws-ssm-document.git"
   },
   "scripts": {
-    "update-document": "for file in src/*.json; do aws ssm update-document --name $(basename $file .json) --content file://$file --document-version \\$LATEST || :; done"
+    "create-document": "f() { for file in src/*.json; do aws ssm create-document --name $(basename $file .json) --content file://$file --document-type Command --region $1 || :; done }; f",
+    "create-document-all-regions": "for region in $(aws ec2 describe-regions --query 'Regions[].RegionName' --output text); do npm run create-document \"$region\"; done",
+    "publish-document": "f() { for file in src/*.json; do aws ssm modify-document-permission --name $(basename $file .json) --permission-type Share --account-ids-to-add All --region $1 || :; done }; f",
+    "publish-document-all-regions": "for region in $(aws ec2 describe-regions --query 'Regions[].RegionName' --output text); do npm run publish-document \"$region\"; done",
+    "update-document": "f() { for file in src/*.json; do aws ssm update-document --name $(basename $file .json) --content file://$file --document-version \\$LATEST --region $1 || :; done }; f",
+    "update-document-all-regions": "for region in $(aws ec2 describe-regions --query 'Regions[].RegionName' --output text); do npm run update-document \"$region\"; done",
+    "update-document-ap-northeast-1": "npm run update-document ap-northeast-1",
+    "update-document-us-west-2": "npm run update-document us-west-2"
   },
   "files": [
     "README.md"
