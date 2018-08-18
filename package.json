@@ -26,7 +26,9 @@
     "publish-document": "f() { for file in src/*.json; do aws ssm modify-document-permission --name $(basename $file .json) --permission-type Share --account-ids-to-add All --region $1 || :; done }; f",
     "publish-document-all-regions": "for region in $(aws ec2 describe-regions --query 'Regions[].RegionName' --output text); do npm run publish-document \"$region\"; done",
     "update-document": "f() { for file in src/*.json; do aws ssm update-document --name $(basename $file .json) --content file://$file --document-version \\$LATEST --region $1 || :; done }; f",
+    "update-document-default-version": "f() { for file in src/*.json; do aws ssm update-document-default-version --name $(basename $file .json) --document-version $(aws ssm describe-document --name $(basename $file .json) --query 'Document.LatestVersion' --output text --region $1) --region $1 || :; done }; f",
     "update-document-all-regions": "for region in $(aws ec2 describe-regions --query 'Regions[].RegionName' --output text); do npm run update-document \"$region\"; done",
+    "update-document-default-version-all-regions": "for region in $(aws ec2 describe-regions --query 'Regions[].RegionName' --output text); do npm run update-document-default-version \"$region\"; done",
     "update-document-ap-northeast-1": "npm run update-document ap-northeast-1",
     "update-document-us-west-2": "npm run update-document us-west-2"
   },
