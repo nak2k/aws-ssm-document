@@ -5,7 +5,7 @@
     "version": {
       "description": "Version of Node.js",
       "type": "String",
-      "default": "11.1.0"
+      "default": "11.3.0"
     },
     "owner": {
       "description": "Owner of installed node.js",
