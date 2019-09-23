@@ -5,7 +5,7 @@ parameters:
   version:
     description: "Version of Node.js"
     type: String
-    default: "12.5.0"
+    default: "12.10.0"
   owner:
     description: "Owner of installed node.js"
     type: String
