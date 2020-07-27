@@ -5,7 +5,7 @@ parameters:
   version:
     description: "Version of Node.js"
     type: String
-    default: "13.2.0"
+    default: "14.6.0"
   owner:
     description: "Owner of installed node.js"
     type: String
